@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccessManagementController;
+use App\Http\Controllers\HistoriqueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route pour la page d'accueil
 Route::get('/', function () {
     return view('welcome');
+
 });
+
+
+// Route pour la gestion d'accès
+Route::get('/access-management', [AccessManagementController::class, 'index'])->name('access-management');
+
+// Route pour l'historique
+Route::get('/historique', [HistoriqueController::class, 'index'])->name('historique');
+
