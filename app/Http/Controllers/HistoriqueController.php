@@ -10,8 +10,9 @@ class HistoriqueController extends Controller
     public function index()
     {
         // Remplacez ceci par votre logique de récupération des données
-        $historique = Access::all(); // Exemple, récupère tous les enregistrements
+       // $historique = Access::all(); // Exemple, récupère tous les enregistrements
 
-        return view('historique', compact('historique'));
+       //return view('historique', compact('historique'));
+       return ('historique');
     }
 }
