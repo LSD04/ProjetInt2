@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_local', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('utilisateur_id')->constrained();
-            $table->foreignId('local_id')->constrained();
-            $table->timestamps();
+        Schema::table('demandes_inscription', function (Blueprint $table) {
+            //
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_local');
+        Schema::table('demandes_inscription', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('prenom');
+            $table->string('adresse_email')->unique();
             $table->string('matricule')->unique();
-            $table->string('statut');
+            $table->boolean('a_acces')->default(false); // Champ ajouté pour gérer l'accès
             $table->timestamps();
         });
     }

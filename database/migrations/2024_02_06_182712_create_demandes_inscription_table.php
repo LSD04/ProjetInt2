@@ -16,8 +16,11 @@ return new class extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->string('adresse_email')->unique();
+            $table->timestamp('date_demande');
             $table->foreignId('local_id')->constrained();
             $table->string('statutDemande'); // en attente, approuvée, refusée
+            $table->unsignedBigInteger('utilisateur_id')->nullable();
+            $table->foreign('utilisateur_id')->references('id')->on('utilisateurs');
             $table->timestamps();
         });
     }

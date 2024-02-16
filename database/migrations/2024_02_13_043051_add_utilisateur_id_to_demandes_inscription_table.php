@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('locals', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom')->unique();
-            $table->timestamps();
+        Schema::table('demandes_inscription', function (Blueprint $table) {
+            //
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('locals');
+        Schema::table('demandes_inscription', function (Blueprint $table) {
+            //
+        });
     }
 };
