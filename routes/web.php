@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DemandesInscriptionsController;
 use App\Http\Controllers\EntreeSortiesController;
@@ -45,11 +46,19 @@ Route::get('/utilisateurs/{id}', [UtilisateursController::class, 'show'])->name(
 
 
 
-// Route pour afficher la page DemandesInscription.blade.php
-Route::get('/demandesinscription', [DemandesInscriptionsController::class, 'index'])->name('demandesinscription.index');
+// Route pour afficher la page DemandesInscription.blade.php  Appliquer le middleware 'auth' pour protéger la route et utiliser le contrôleur pour la logique
+Route::get('/demandesinscription', [DemandesInscriptionsController::class, 'index'])->middleware('auth')->name('demandesinscription.index');
 
 // Route pour afficher les détails d'une demande d'inscription spécifique
 Route::get('/demandesinscription/{id}', [DemandesInscriptionsController::class, 'show'])->name('demandesinscription.show');
 
 // Route pour supprimer une demande d'inscription spécifique (si nécessaire)
 Route::delete('/demandesinscription/{id}', [DemandesInscriptionsController::class, 'destroy'])->name('demandesinscription.destroy');
+
+
+//Routes Connexion
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+
+// Déconnexion
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
