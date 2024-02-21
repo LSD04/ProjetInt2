@@ -4,46 +4,44 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+//use App\Http\Requests\LoginRequest; // Assurez-vous que cette classe de requête existe avec les règles de validation appropriées.
 
 class AuthController extends Controller
 {
     // Afficher le formulaire de connexion
     public function showLoginForm()
     {
-        // Assurez-vous que les utilisateurs connectés ne peuvent pas accéder au formulaire de connexion
-        if (Auth::check()) {
-            return redirect()->route('demandesinscriptions.index');
-        }
-        return view('login');
+        // Si l'utilisateur est déjà connecté, redirige vers la page des demandes d'inscription
+        return Auth::check() ? redirect()->route('demandesinscription.index') : view('login');
     }
 
-    // Gérer la soumission du formulaire de connexion
+    // Traiter la tentative de connexion
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $reussi = Auth::attempt([ 'adresse_email'=>$request->adresse_email, 'password'=>$request->password]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('demandesinscription.index');
+        if ($reussi) {
+            // Régénère la session pour protéger contre la fixation de session
+            //$request->session()->regenerate();
+
+            // Redirige vers la page des demandes d'inscription après connexion réussie
+            return redirect()->route('demandesinscription.index')->with('message', 'Connexion réussie');
+        } else {
+            // En cas d'échec, redirige vers le formulaire de connexion avec un message d'erreur
+            return back()->with('invalid', 'L\'adresse courriel et/ou le mot de passe est invalide.');
         }
-
-        return back()->withErrors([
-            'email' => 'Les informations fournies ne correspondent pas à nos enregistrements.',
-        ])->onlyInput('email');
     }
 
-    // Déconnexion
+    // Gérer la déconnexion
     public function logout(Request $request)
     {
         Auth::logout();
 
+        // Invalide la session et régénère le token de la session
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        // Redirige vers la page de connexion
+        return redirect()->route('login')->with('message', "Déconnexion réussie");
     }
-
 }
