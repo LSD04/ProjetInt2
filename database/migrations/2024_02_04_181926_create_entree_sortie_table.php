@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('entree_sortie', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('utilisateur_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->foreignId('local_id')->constrained();
             $table->dateTime('date_et_heure_entree');
             $table->dateTime('date_et_heure_sortie')->nullable();

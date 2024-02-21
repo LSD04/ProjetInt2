@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UtilisateursTableSeeder::class);
         $this->call(LocalTableSeeder::class );
         $this->call(DemandesInscriptionTableSeeder::class );
+        $this->call(UserTableSeeder::class );
     }
 }

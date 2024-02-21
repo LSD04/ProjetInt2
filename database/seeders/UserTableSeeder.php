@@ -4,17 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Utilisateur;
 use Illuminate\Support\Facades\Hash;
 
-class UtilisateursTableSeeder extends Seeder
+class UserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $utilisateurs = [
+       
+        $users = [
             [
                 'nom' => 'Doe',
                 'prenom' => 'John',
@@ -40,9 +40,5 @@ class UtilisateursTableSeeder extends Seeder
                 'password' => Hash::make('123'),
             ],
         ];
-
-        foreach ($utilisateurs as $utilisateur) {
-            Utilisateur::create($utilisateur);
-        }
     }
 }
