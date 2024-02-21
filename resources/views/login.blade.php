@@ -33,7 +33,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-at" aria-hidden="true"></i><br></div>
                         </div>
-                        <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="{{ old('email')}}">
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="adresse_email" value="{{ old('adresse_email')}}">
                     </div> 
                     @error('email')
                         <span class= "text-danger">{{$message}}</span>
