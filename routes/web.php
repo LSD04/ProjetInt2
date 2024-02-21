@@ -24,7 +24,7 @@ use App\Http\Controllers\UtilisateursController;
 
 // Route pour la page d'accueil
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 
 });
 
@@ -34,8 +34,6 @@ Route::get('/gestionAccess', [AccessController::class, 'index'])->name('gestionA
 
 // Route pour l'historique
 Route::get('/entreeSortie', [EntreeSortiesController::class, 'index'])->name('entreeSortie');
-
-
 
 //Afficher le profil d'un utilisateur
 Route::get('/utilisateurs/{id}', [UtilisateursController::class, 'show'])->name('utilisateurs.show');
