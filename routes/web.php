@@ -24,7 +24,7 @@ use App\Http\Controllers\UtilisateursController;
 
 // Route pour la page d'accueil
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 
 });
 
