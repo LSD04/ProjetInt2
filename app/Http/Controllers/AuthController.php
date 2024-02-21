@@ -19,6 +19,8 @@ class AuthController extends Controller
     // Traiter la tentative de connexion
     public function login(Request $request)
     {
+
+        
         $reussi = Auth::attempt([ 'adresse_email'=>$request->adresse_email, 'password'=>$request->password]);
 
         if ($reussi) {
