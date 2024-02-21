@@ -28,6 +28,8 @@ Route::get('/', function () {
 
 });
 
+// Route pour page d'accueil Admin
+Route::get('/admin', [AdminController::class, 'index'])->name('accueilAdmin');
 
 // Route pour la gestion d'accès
 Route::get('/gestionAccess', [AccessController::class, 'index'])->name('gestionAccess');

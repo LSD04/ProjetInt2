@@ -20,7 +20,7 @@ class AdminsSeeder extends Seeder
                 'nom'=>'Admin',
                 'prenom'=>'Admin',
                 'matricule'=>'123111',
-                'email'=>'admin@email.com',
+                'adresse_email'=>'admin@email.com',
                 'password'=>Hash::make('123'),
             ]
 
