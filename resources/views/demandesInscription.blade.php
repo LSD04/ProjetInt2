@@ -1,37 +1,50 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails de la Demande d'Inscription</title>
-    <link rel="stylesheet" href="{{asset('style.css')}}">
-</head>
-<body class="fond">
-    <div class="container formulaire">
-        <h1 class="text-center">Détails de la Demande d'Inscription</h1>
-        @if(isset($demandesInscriptions) && $demandesInscriptions->isEmpty())
-            <p class="text-center">Aucune demande d'inscription n'a été trouvée.</p>
-        @else
-            <div class="card">
-                @foreach ($demandesInscriptions as $demandeInscription)
-                    <div class="card-body">
-                        <p class="card-text"><strong>Nom :</strong> {{ $demandeInscription->nom }}</p>
-                        <p class="card-text"><strong>Prénom :</strong> {{ $demandeInscription->prenom }}</p>
-                        <p class="card-text"><strong>Email :</strong> {{ $demandeInscription->adresse_email }}</p>
-                        <p class="card-text"><strong>Date de la demande :</strong> {{ $demandeInscription->date_demande ? $demandeInscription->date_demande->format('d/m/Y H:i') : 'Non spécifiée' }}</p>
-                        <p class="card-text"><strong>ID du local :</strong> {{ $demandeInscription->local_id }}</p>
-                        <p class="card-text"><strong>Statut de la demande :</strong> {{ $demandeInscription->statutDemande }}</p>
-                        <p class="card-text"><strong>ID Utilisateur :</strong> {{ $demandeInscription->utilisateur_id }}</p>
-                        <p class="card-text"><strong>Nom de l'Utilisateur :</strong> {{ $demandeInscription->utilisateur->nom ?? 'Non spécifié' }}</p>
-                    </div>
-                @endforeach
+@extends('layouts.app')
+
+@section('contenu')
+<div class="container">
+    <h1 class="text-center">Demandes d'Inscription</h1>
+    
+    <!-- Formulaire de recherche -->
+    <form action="{{ route('demandesinscription.index') }}" method="GET" class="mb-4">
+        <div class="input-group mb-3">
+            <input type="text" name="search" class="form-control" placeholder="Rechercher par nom ou prénom" value="{{ request('search') }}">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-secondary">Recherche</button>           
             </div>
-        @endif
-        <div class="text-center">
-            <a href="{{ route('demandesinscription.index') }}" class="btn btnOrder">Retour à la liste des demandes</a>
         </div>
+  
+    </form>
+    <!-- Fin du formulaire de recherche -->
+
+    
+    <!-- Formulaire pour rétirer l'accès à tous les utilisateurs -->
+
+    <form action="{{ route('utilisateurs.retirerAcces') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-warning">Retirer l'accès à tous</button>
+    </form>
+
+
+    
+    <!-- Fin du formulaire pour rétirer l'accès à tous les utilisateurs -->
+
+    <div class="row">
+        @forelse ($demandesInscriptions as $demandeInscription)
+            <div class="col-md-4">
+                <div class="card" onclick="window.location.href='{{ route('demandesinscription.show', $demandeInscription->id) }}'">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $demandeInscription->nom }} {{ $demandeInscription->prenom }}</h5>
+                        <p class="card-text">Statut: {{ $demandeInscription->statutDemande }}</p>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <p class="text-center">Aucune demande d'inscription trouvée.</p>
+        @endforelse
     </div>
-</body>
-</html>
+</div>
+@endsection
+
+
 
 

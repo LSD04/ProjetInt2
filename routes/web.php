@@ -29,7 +29,7 @@ Route::get('/', function () {
 });
 
 // Route pour page d'accueil Admin
-Route::get('/admin', [AdminController::class, 'index'])->name('accueilAdmin');
+
 
 // Route pour la gestion d'accès
 Route::get('/gestionAccess', [AccessController::class, 'index'])->name('gestionAccess');
@@ -40,20 +40,28 @@ Route::get('/entreeSortie', [EntreeSortiesController::class, 'index'])->name('en
 //Afficher le profil d'un utilisateur
 Route::get('/utilisateurs/{id}', [UtilisateursController::class, 'show'])->name('utilisateurs.show');
 
-//Afficher DemandesInscription
+
 
 
 
 
 
 // Route pour afficher la page DemandesInscription.blade.php  Appliquer le middleware 'auth' pour protéger la route et utiliser le contrôleur pour la logique
-Route::get('/demandesinscription', [DemandesInscriptionsController::class, 'index'])->middleware('auth')->name('demandesinscription.index');
+Route::get('/demandesinscription', [DemandesInscriptionsController::class, 'index'])->name('demandesinscription.index');
 
 // Route pour afficher les détails d'une demande d'inscription spécifique
 Route::get('/demandesinscription/{id}', [DemandesInscriptionsController::class, 'show'])->name('demandesinscription.show');
 
 // Route pour supprimer une demande d'inscription spécifique (si nécessaire)
 Route::delete('/demandesinscription/{id}', [DemandesInscriptionsController::class, 'destroy'])->name('demandesinscription.destroy');
+
+// Met à jour une demande d'inscription spécifique
+Route::patch('/demandesinscription/{id}', [DemandesInscriptionsController::class, 'update'])->name('demandesinscription.update');
+
+// Rétirer l,accès à tous les utilisateurs
+Route::post('/utilisateurs/retirer-acces', [UtilisateursController::class, 'retirerAccesTous'])->name('utilisateurs.retirerAcces');
+
+
 
 
 //Routes Connexion
