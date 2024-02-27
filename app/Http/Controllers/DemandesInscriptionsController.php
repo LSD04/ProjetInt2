@@ -10,12 +10,24 @@ class DemandesInscriptionsController extends Controller
     /**
      * Affiche une liste de toutes les demandes d'inscription.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Récupère toutes les demandes et les passe à la vue
-        $demandesInscriptions =DemandesInscription::all();
+        $search = $request->input('search');
+        
+        if (!empty($search)) {
+            // Filtre les demandes d'inscription par nom ou prénom
+            $demandesInscriptions = DemandesInscription::where('nom', 'LIKE', "%{$search}%")
+                ->orWhere('prenom', 'LIKE', "%{$search}%")
+                ->get();
+        } else {
+            // Récupère toutes les demandes si aucun terme de recherche n'est spécifié
+            $demandesInscriptions = DemandesInscription::all();
+        }
+    
         return view('DemandesInscription', compact('demandesInscriptions'));
     }
+    
+
 
     /**
      * Affiche les détails d'une demande d'inscription spécifique.
@@ -26,8 +38,25 @@ class DemandesInscriptionsController extends Controller
         $demandeInscription = DemandesInscription::findOrFail($id);
         
         // Affiche une vue avec les détails de la demande d'inscription
-        return view('DemandesInscription', compact('demandesInscription'));
+        return view('showDemandeInscription', compact('demandeInscription'));
     }
+
+
+
+    // Met à jour le statut d'une demande d'inscription
+    public function update(Request $request, $id)
+    {
+        // $demandeInscription = DemandesInscription::findOrFail($id);
+        // $demandeInscription->update($request->all());
+        // return redirect()->route('demandesinscription.index')->with('message', 'Statut de la demande modifié avec succès');
+        $demandeInscription = DemandesInscription::findOrFail($id);
+        $demandeInscription->statutDemande = $request->input('statutDemande');
+        $demandeInscription->save();
+        return redirect()->route('demandesinscription.index')->with('message', 'Statut de la demande modifié avec succès');
+        //return redirect()->route('demandesinscription.show', $id)->with('success', 'La demande d\'inscription a été mise à jour.');
+    }
+
+
 
     /**
      * Supprime une demande d'inscription spécifique de la base de données.

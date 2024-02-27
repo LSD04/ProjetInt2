@@ -17,6 +17,17 @@ class UtilisateursController extends Controller
 
 
 
+    public function retirerAccesTous()
+    {
+        // Met à jour tous les utilisateurs pour retirer l'accès
+        Utilisateur::query()->update(['a_acces' => false]);
+    
+        // Redirige l'administrateur vers la page précédente avec un message de succès
+        return back()->with('success', 'L\'accès a été retiré à tous les utilisateurs.');
+    }
+
+
+
     public function profil()
  {
 //     // Utilisez l'authentification Laravel pour obtenir l'utilisateur connecté

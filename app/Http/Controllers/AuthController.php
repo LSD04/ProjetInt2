@@ -27,7 +27,7 @@ class AuthController extends Controller
        {
             $reussiAdmin = Auth::guard('admin')->attempt(['adresse_email' => $request->adresse_email, 'password' => $request->password]); 
             if ($reussiAdmin) {
-                return redirect()->route('accueilAdmin')->with('message', 'Connexion réussie');
+                return redirect()->route('demandesinscription.index')->with('message', 'Connexion réussie');
             } else {
                 return back()->with('invalid', 'L\'adresse courriel et/ou le mot de passe est invalide.');
             }

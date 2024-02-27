@@ -174,7 +174,7 @@ h2{
 }
 .card:hover{
     /*background-color:rgb(26, 65, 112);*/
-    background-color:rgb(11, 35, 65);
+    background-color:inherit;
     border-color:rgb(11, 35, 65) ;
     color:white;
     
