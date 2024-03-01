@@ -9,11 +9,19 @@ class EntreeSortiesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $historique = Entree_sortie::with(['utilisateur', 'local'])->get();
+        $query = Entree_sortie::with(['user', 'local']);
+    
+        if ($request->filled('date')) {
+            $query->whereDate('date_et_heure_entree', $request->date);
+        }
+    
+        $historique = $query->get();
+    
         return view('entreeSortie', compact('historique'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -16,15 +16,23 @@ class UtilisateursController extends Controller
     }
 
 
+    // Retirer l'accès à un utilisateur spécifique
+    public function retirerAcces($id)
+{
+    $utilisateur = Utilisateur::findOrFail($id);
+    $utilisateur->a_acces = false;
+    $utilisateur->save();
 
+    return back()->with('success', 'Accès retiré avec succès.');
+}
+
+// Retirer l'accès à tous les utilisateurs
     public function retirerAccesTous()
-    {
-        // Met à jour tous les utilisateurs pour retirer l'accès
-        Utilisateur::query()->update(['a_acces' => false]);
-    
-        // Redirige l'administrateur vers la page précédente avec un message de succès
-        return back()->with('success', 'L\'accès a été retiré à tous les utilisateurs.');
-    }
+{
+    Utilisateur::query()->update(['a_acces' => false]);
+
+    return back()->with('success', 'L\'accès a été retiré à tous les utilisateurs.');
+}
 
 
 

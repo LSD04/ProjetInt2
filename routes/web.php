@@ -24,7 +24,7 @@ use App\Http\Controllers\UtilisateursController;
 
 // Route pour la page d'accueil
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 
 });
 
@@ -62,9 +62,13 @@ Route::delete('/demandesinscription/{id}', [DemandesInscriptionsController::clas
 Route::patch('/demandesinscription/{id}', [DemandesInscriptionsController::class, 'update'])->name('demandesinscription.update');
 
 // Rétirer l,accès à tous les utilisateurs
-Route::post('/utilisateurs/retirer-acces', [UtilisateursController::class, 'retirerAccesTous'])->name('utilisateurs.retirerAcces');
+Route::patch('/utilisateurs/{id}/retirer-acces', [UtilisateursController::class, 'retirerAcces'])->name('utilisateurs.retirerAcces');
+Route::post('/utilisateurs/retirer-acces-tous', [UtilisateursController::class, 'retirerAccesTous'])->name('utilisateurs.retirerAccesTous');
 
 
+
+// Afficher demandes approuvées
+Route::get('/demandes-approuvees', [DemandesInscriptionsController::class, 'demandesApprouvees'])->name('demandes.approuvees');
 
 
 //Routes Connexion
