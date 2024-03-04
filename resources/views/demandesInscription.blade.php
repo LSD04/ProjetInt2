@@ -17,12 +17,7 @@
     <!-- Fin du formulaire de recherche -->
 
     
-    <!-- Formulaire pour rétirer l'accès à tous les utilisateurs -->
 
-    <form action="{{ route('utilisateurs.retirerAcces') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-warning">Retirer l'accès à tous</button>
-    </form>
 
 
     

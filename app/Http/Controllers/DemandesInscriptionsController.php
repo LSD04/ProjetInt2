@@ -26,7 +26,28 @@ class DemandesInscriptionsController extends Controller
     
         return view('DemandesInscription', compact('demandesInscriptions'));
     }
+
+
+
+
+    public function demandesApprouvees()
+    {
+        $demandesApprouvees = DemandesInscription::where('statutDemande', 'approuvée')->get();
+        return view('demandesApprouvees', compact('demandesApprouvees'));
+    }
     
+
+    public function approuverDemande($id)
+    {
+        $demande = DemandesInscription::findOrFail($id);
+        $demande->statutDemande = 'approuvée';
+        $demande->save();
+
+    // Redirection vers la page des demandes en attente
+     return redirect()->route('demandesinscription.index')->with('success', 'Demande approuvée avec succès.');
+    }
+
+
 
 
     /**

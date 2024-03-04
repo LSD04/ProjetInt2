@@ -1,21 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Entree_sortie;
 use Illuminate\Http\Request;
 
-class EntreeSortieController extends Controller
+class EntreeSortiesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-            // Remplacez ceci par votre logique de récupération des données
-       // $historique = Access::all(); // Exemple, récupère tous les enregistrements
-;
-       return view('entreeSortie');
+        $query = Entree_sortie::with(['user', 'local']);
+    
+        if ($request->filled('date')) {
+            $query->whereDate('date_et_heure_entree', $request->date);
+        }
+    
+        $historique = $query->get();
+    
+        return view('entreeSortie', compact('historique'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
