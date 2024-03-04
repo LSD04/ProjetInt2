@@ -12,7 +12,8 @@ class DemandesInscriptionsController extends Controller
      */
     public function index(Request $request)
     {
-        $demandesInscriptions = DemandesInscription::all();
+     
+        $demandesInscriptions =  DemandesInscription::where('statutDemande', 'en attente')->get();
         // $search = $request->input('search');
         
         // if (!empty($search)) {
