@@ -12,17 +12,18 @@ class DemandesInscriptionsController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->input('search');
+        $demandesInscriptions = DemandesInscription::all();
+        // $search = $request->input('search');
         
-        if (!empty($search)) {
-            // Filtre les demandes d'inscription par nom ou prénom
-            $demandesInscriptions = DemandesInscription::where('nom', 'LIKE', "%{$search}%")
-                ->orWhere('prenom', 'LIKE', "%{$search}%")
-                ->get();
-        } else {
-            // Récupère toutes les demandes si aucun terme de recherche n'est spécifié
-            $demandesInscriptions = DemandesInscription::all();
-        }
+        // if (!empty($search)) {
+        //     // Filtre les demandes d'inscription par nom ou prénom
+        //     $demandesInscriptions = DemandesInscription::where('nom', 'LIKE', "%{$search}%")
+        //         ->orWhere('prenom', 'LIKE', "%{$search}%")
+        //         ->get();
+        // } else {
+        //     // Récupère toutes les demandes si aucun terme de recherche n'est spécifié
+        //     $demandesInscriptions = DemandesInscription::all();
+        // }
     
         return view('DemandesInscription', compact('demandesInscriptions'));
     }
