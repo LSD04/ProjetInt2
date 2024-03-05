@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Utilisateur;
+use Log;
 
 class UtilisateursController extends Controller
 {
@@ -19,6 +20,7 @@ class UtilisateursController extends Controller
     // Retirer l'accès à un utilisateur spécifique
     public function retirerAcces($id)
 {
+    Log::debug("retirer acces");
     $utilisateur = Utilisateur::findOrFail($id);
     $utilisateur->a_acces = false;
     $utilisateur->save();
