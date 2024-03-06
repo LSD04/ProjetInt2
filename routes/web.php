@@ -65,7 +65,8 @@ Route::patch('/demandesinscription/{id}', [DemandesInscriptionsController::class
 Route::patch('/utilisateurs/{id}/retirer-acces', [UtilisateursController::class, 'retirerAcces'])->name('utilisateurs.retirerAcces');
 Route::post('/utilisateurs/retirer-acces-tous', [UtilisateursController::class, 'retirerAccesTous'])->name('utilisateurs.retirerAccesTous');
 
-
+// Redonner l,accès à tous les utilisateurs
+Route::patch('/utilisateurs/{id}/remettre-acces', [UtilisateursController::class, 'remettreAcces'])->name('utilisateurs.remettreAcces');
 
 // Afficher demandes approuvées
 Route::get('/demandes-approuvees', [DemandesInscriptionsController::class, 'demandesApprouvees'])->name('demandes.approuvees');
