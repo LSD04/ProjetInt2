@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Utilisateur;
+use Log;
 
 class UtilisateursController extends Controller
 {
@@ -14,6 +15,35 @@ class UtilisateursController extends Controller
     {
         //
     }
+
+
+    // Retirer l'accès à un utilisateur spécifique
+    public function retirerAcces($id)
+{
+    Log::debug("retirer acces");
+    $utilisateur = Utilisateur::findOrFail($id);
+    $utilisateur->a_acces = false;
+    $utilisateur->save();
+
+    return back()->with('success', 'Accès retiré avec succès.');
+}
+
+public function remettreAcces($id)
+{
+
+    $utilisateur = Utilisateur::findOrFail($id);
+    $utilisateur->a_acces = true;
+    $utilisateur->save();
+    return back()->with('success', 'Accès remis avec succès.');
+}
+
+// Retirer l'accès à tous les utilisateurs
+    public function retirerAccesTous()
+{
+    Utilisateur::query()->update(['a_acces' => false]);
+
+    return back()->with('success', 'L\'accès a été retiré à tous les utilisateurs.');
+}
 
 
 

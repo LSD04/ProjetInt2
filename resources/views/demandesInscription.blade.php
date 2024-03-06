@@ -1,37 +1,102 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails de la Demande d'Inscription</title>
-    <link rel="stylesheet" href="{{asset('style.css')}}">
-</head>
-<body class="fond">
-    <div class="container formulaire">
-        <h1 class="text-center">Détails de la Demande d'Inscription</h1>
-        @if(isset($demandesInscriptions) && $demandesInscriptions->isEmpty())
-            <p class="text-center">Aucune demande d'inscription n'a été trouvée.</p>
-        @else
-            <div class="card">
-                @foreach ($demandesInscriptions as $demandeInscription)
-                    <div class="card-body">
-                        <p class="card-text"><strong>Nom :</strong> {{ $demandeInscription->nom }}</p>
-                        <p class="card-text"><strong>Prénom :</strong> {{ $demandeInscription->prenom }}</p>
-                        <p class="card-text"><strong>Email :</strong> {{ $demandeInscription->adresse_email }}</p>
-                        <p class="card-text"><strong>Date de la demande :</strong> {{ $demandeInscription->date_demande ? $demandeInscription->date_demande->format('d/m/Y H:i') : 'Non spécifiée' }}</p>
-                        <p class="card-text"><strong>ID du local :</strong> {{ $demandeInscription->local_id }}</p>
-                        <p class="card-text"><strong>Statut de la demande :</strong> {{ $demandeInscription->statutDemande }}</p>
-                        <p class="card-text"><strong>ID Utilisateur :</strong> {{ $demandeInscription->utilisateur_id }}</p>
-                        <p class="card-text"><strong>Nom de l'Utilisateur :</strong> {{ $demandeInscription->utilisateur->nom ?? 'Non spécifié' }}</p>
-                    </div>
-                @endforeach
+@extends('layouts.app')
+
+@section('contenu')
+<body onload="createCard()">
+    <div class="container">
+        <h1 class="text-center">Demandes d'Inscription</h1>
+        
+        <!-- Formulaire de recherche -->
+        <div class="mb-4" id="test">
+            <div class="input-group mb-3">
+                <input type="text" name="search" class="form-control" id="searchInput" placeholder="Rechercher par nom ou prénom"">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary">Recherche</button>           
+                </div>
             </div>
-        @endif
-        <div class="text-center">
-            <a href="{{ route('demandesinscription.index') }}" class="btn btnOrder">Retour à la liste des demandes</a>
+        </div>
+        <!-- Fin du formulaire de recherche -->
+
+        
+
+
+
+        
+        <!-- Fin du formulaire pour rétirer l'accès à tous les utilisateurs -->
+
+        <div id="listeCard">
+            @if(count($demandesInscriptions))
+                {{-- <div class="col-md-4"> --}}
+                    {{-- <div class="card" onclick="window.location.href='{{ route('demandesinscription.show', $demandeInscription->id) }}'">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $demandeInscription->nom }} {{ $demandeInscription->prenom }}</h5>
+                            <p class="card-text">Statut: {{ $demandeInscription->statutDemande }}</p>
+                        </div>
+                    </div> --}}
+                {{-- </div> --}}
+            @else
+                <p class="text-center">Aucune demande d'inscription trouvée.</p>
+            @endif
         </div>
     </div>
 </body>
-</html>
+
+<script>
+let originalData = @json($demandesInscriptions);
+let actualData;
 
 
+function createCard(data)
+    {
+        if(data == null){
+            data = actualData = originalData;
+            console.log(data)
+        }
+
+         let cardData = document.getElementById("listeCard"); 
+         let card = '<div class="row">';
+            for(i = 0; i < data.length; i++){
+                let urlShow = '{{ route('demandesinscription.show', ":id") }}';
+                let placeholder = ":id";
+                let url = urlShow.replace(placeholder, data[i].id);
+               
+                card = card  + `
+                <a href=${url} class="col-md-4" style="text-decoration:none;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${data[i].nom} ${data[i].prenom}</h5>
+                            <p class="card-text">Statut: ${data[i].statutDemande}</p>
+                        </div>
+                    </div>
+                </a>
+            `;
+
+        }
+        cardData.innerHTML = card;
+        console.log(cardData);
+    }
+
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("keyup", (e) => {
+      
+        let value = e.target.value;
+
+        if (value && value.trim().length > 0){
+            value = value.trim().toLowerCase();
+
+            var formSearch = originalData.filter(f => 
+                f.nom.toLowerCase().includes(value) || 
+                f.prenom.toLowerCase().includes(value)
+            );
+            actualData = formSearch;
+
+            createCard(actualData);
+        }
+        else if(!value || value === ""){
+            actualData = originalData;
+            createCard();
+        }
+    });
+    
+</script>
+
+@endsection
