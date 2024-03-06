@@ -35,9 +35,9 @@
                         </div>
                         <input type="email" class="form-control" id="email" placeholder="Email" name="adresse_email" value="{{ old('adresse_email')}}">
                     </div> 
-                    @error('email')
+                    {{-- @error('email')
                         <span class= "text-danger">{{$message}}</span>
-                    @enderror
+                    @enderror --}}
                     
                     <br>
                     <div class="input-group">
@@ -46,9 +46,9 @@
                         </div>
                         <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password" value="{{ old('password')}}">  
                     </div>
-                    @error('password')
+                    {{-- @error('password')
                         <span class= "text-danger">{{$message}}</span>
-                    @enderror
+                    @enderror --}}
                     <span class="text-danger">
                         {!! Session::has('invalid') ? Session::get("invalid") : '' !!}
                     </span>
