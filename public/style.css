@@ -1,0 +1,492 @@
+/*body*/
+
+html, body
+{
+    width: 100%;
+    height: 100%;
+    background-color: #eeeef0;
+   /* background: url("https://wallpaperaccess.com/full/4878834.png") no-repeat fixed center;*/
+   /* background-repeat: no-repeat;
+    background-position: bottom;
+    /*background-position: right;
+    background-size: cover;*/
+    margin: 0;
+    padding: 0;
+    
+    font-family: "Poppins", sans-serif;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* navbar*/
+
+.navbar{
+    height: 6.5rem;
+    font-size: 16px;
+    font-weight:bold;
+    border-bottom: 1px solid #ccc;
+    z-index: 1;
+    background-color: #ffffff;
+    color: rgb(11, 35, 65);
+    /* background-color: rgb(11, 35, 65);  */
+    /*  background-color:  rgb(0, 118, 213);*/
+}
+
+.navbar-toggler{
+    color:#ffffff;
+    /* border-color:#ffffff; */
+    background-color:rgb(11, 35, 65);
+}
+
+.navbar-toggler:hover, .navbar-toggler:focus
+{
+    /*background-color:rgb(11, 35, 65) ;*/
+    background-color: #ffffff;
+    border-color:rgb(11, 35, 65);
+}
+
+.navbar-toggler:focus, .navbar-toggler:hover>.fas{
+    color:rgb(11, 35, 65) ;
+}
+.fas:hover, .fas:active{
+    color:#ffffff;
+}
+
+.nav-link{
+    color:#000000;
+    padding-left: 0.5rem;
+}
+
+.nav-item{
+    list-style-type: none;
+}
+
+.nav-item:hover, .nav-item:active{
+    list-style-type: none;
+    color:rgb(11, 35, 65) ;
+    
+}
+
+.navBt{
+    padding: 0.5rem;
+}
+.navbar-collapse{
+    /* background-color:rgb(11, 35, 65); */
+   /*background-color:rgb(120, 198, 224);*/
+    background-color:#ffffff;
+    /* background-color:  rgb(0, 118, 213); */
+    justify-content: space-between;
+}
+
+.nav-link:hover, .nav-link:active, .nav-link:focus{
+    color:  rgb(0, 118, 213);
+ 
+}
+@media (max-width:990px){
+    .navbar-nav>li {
+        border-bottom: 1px solid rgb(11, 35, 65);;
+    }
+}
+
+.formConnexion {
+    display: contents;
+}
+.logo{
+    width: 5rem;
+
+}
+
+.imgUser{
+    padding-bottom:2rem;
+}
+.btnConnexion:hover{
+    color: rgb(0, 118, 213)
+}
+.btnConnexion{
+    background: none;
+    border: none;
+    font-weight:bold;
+    padding-left: 0;
+    color:#000000;
+    /* color: #ffffff; */
+}
+
+.divConnexion{
+    background-color: rgb(11, 35, 65);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.profilDropdown
+{
+    padding-top:1rem;
+    text-decoration: none;
+    color: #000000;
+}
+   /* login  */
+.divCenter{
+    margin-top: 10rem;
+}
+
+.text-center{
+    font-family: "Poppins", sans-serif;  
+}
+
+.fa-user-circle{
+    color:#eeeef0;
+    border-radius: 55px;
+}
+
+.divBt{
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.divBtConnexion{
+    display: flex;
+    justify-content: center;
+}
+.btnLogin
+{
+    background-color: rgb(0, 118, 213);
+    width: 10rem;
+}
+/* Page accueil employe*/
+
+h2{
+    /* color: rgb(0, 118, 213); */
+    color: rgb(11, 35, 65);
+   
+}
+.card{
+    /*background-color:rgb(11, 35, 65) ;*/
+    background-color:#ffffff ;
+    color: rgb(11, 35, 65) ;
+    /*background-color:rgb(120, 198, 224);*/
+    /*background-color: rgb(0, 118, 213);*/
+    /*color: #ffffff;*/
+    border-color:rgb(11, 35, 65);
+    transition-duration: 0.4s;
+}
+.card:hover{
+    /*background-color:rgb(26, 65, 112);*/
+    background-color:inherit;
+    border-color:rgb(11, 35, 65) ;
+    color:white;
+    
+}
+
+/* liste formulaire superviseur*/
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color:rgb(11, 35, 65);
+    color:#ffffff;
+ }
+ .table-striped>tbody>tr:nth-child(odd)>td>a>svg {
+    filter: invert(95%) sepia(95%) saturate(20%) hue-rotate(24deg) brightness(106%) contrast(104%);
+ }
+
+.tableForm>:not(caption)>*>*{
+    padding: 1.5rem 0.5rem;
+} 
+.divCentre{
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.table{
+    margin-bottom: 0rem;
+}
+.btn{
+    /*background: linear-gradient(to bottom right,rgb(11, 35, 65) ,rgb(120, 198, 224) );*/
+    background-color: rgb(0, 118, 213);
+    color: white;
+    transition-duration: 0.4s;
+    font-size: 1.3rem;
+    font-family: "Poppins", sans-serif;  
+   
+   }
+
+.btn:hover {
+    color: #ffffff;
+    background-color: rgb(60, 144, 212);
+    /* box-shadow: 0 0 20px 9px rgb(0, 118, 213) ; */
+}
+.btnOrder:hover {
+    color: #ffffff;
+    background-color:rgb(26, 65, 112);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.lienForm{
+    display: flex;
+    justify-content: center;
+}
+
+.divOrder{
+    display: flex;
+    justify-content: center;
+}
+
+.btnOrder{
+    font-size: 1rem;
+    background-color:rgb(11, 35, 65) ;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.btnOrder:hover{
+    background-color: #ffffff;
+    color: #000000;
+    border-color:rgb(11, 35, 65) ;
+}
+
+.dropdown-item{
+    border-color:rgb(11, 35, 65) ;
+  
+}
+
+.dropdown-item:hover, .dropdown-item:active{
+    background-color:rgb(11, 35, 65) ;
+    color:#ffffff;
+}
+
+.dropdown-menu{
+    border-color:rgb(11, 35, 65) ;
+}
+
+.divAucun{
+    color:#000000;
+    display: flex;
+    justify-content: center;
+}
+
+.divDrop
+{
+    padding-bottom: 1rem;
+}
+/* formulaire*/
+input[type=text]{
+    border: 2px solid rgb(11, 35, 65);
+}
+input[type=radio]{
+    border: 2px solid rgb(11, 35, 65);
+}
+input[type=date]{
+    border: 2px solid rgb(11, 35, 65);
+}
+input[type=time]{
+    border: 2px solid rgb(11, 35, 65);
+}
+input[type=checkbox]{
+    border: 2px solid rgb(11, 35, 65);
+}
+textarea{
+    border: 2px solid rgb(11, 35, 65);
+    width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  resize: none;
+  background-color: #f8f8f8;
+}
+.divForm{
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 667px) {
+    th.vertical-th2 {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      padding-bottom: 2px;
+      padding-top: 2px;
+    
+    }
+    .pad{
+        padding-right: 2px;
+    }
+    
+  }
+
+.form-label{
+    /*color:#ffffff;*/
+    color: rgb(11, 35, 65);
+}
+
+.labelForm{
+    color: rgb(11, 35, 65);
+}
+
+.form-control{
+    border: 2px solid rgb(11, 35, 65);
+}
+
+/*Formulaire audit */
+   
+      @media (max-width: 667px) {
+        th.vertical-th {
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          padding-bottom: 10px;
+        }
+      }
+
+/* formulaire accident */
+h1{
+    /*color:#ffffff;*/
+    color: rgb(11, 35, 65);
+ 
+}
+h3{
+    font-family: "Poppins", sans-serif;  
+    /*color: white;
+    color: rgb(11, 35, 65);*/
+    color:rgb(0, 118, 213);
+
+}
+.formulaire{
+   padding: 40px;
+   /*background-color:rgb(11, 35, 65) ;*/
+   background-color:white ;/*
+  border-color: rgb(11, 35, 65);*/
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+p{
+    /*color: white;*/
+    color: rgb(11, 35, 65);
+}
+
+.checkG{
+    padding-right: 0.5rem;
+}
+.checkH{
+    padding-right: 1.8rem;
+}
+
+/*Accueil Admin*/
+
+.menu{
+    /* background: linear-gradient(rgb(11, 35, 65), rgb(120, 198, 224)); */
+    background-color:rgb(120, 198, 224);
+    /*background-color:white;*/
+}
+
+.btnDConnexion{
+    background-color:rgba(54, 51, 51, 0.377);
+    color: white;
+}
+.fs-4{
+    color:white;
+}
+.logoAdmin{
+    background-color: white;
+    width: 6rem;
+    height: 6rem;
+   
+}
+
+.fond{
+    overflow-x:auto;
+}
+
+.no-underline {
+    text-decoration: none; 
+}
+
+@media screen and (max-width: 600px) {
+    .logoAdmin {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+/*liste formulaire admin*/
+
+@media only screen and (min-width: 600px) {
+    .filter{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .page{
+        display: flex!important;
+        align-items: center!important;
+        justify-content: center!important;
+    }
+}
+
+.inputSearch{
+    background-color:rgb(11, 35, 65) ;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* form complet admin*/
+
+@media screen and (max-width: 600px) {
+    .confirmSup{
+        width: 75%;
+    }
+}
+
+/* liste documents admin*/
+/* 
+.add{
+    width: 80px;
+    
+} */
+
+.divPlus{
+    display: flex;
+    justify-content: center;
+    margin-bottom:1rem;
+}
+
+.nomDepart{
+    color:rgb(0, 118, 213);
+    /* color: rgb(11, 35, 65); */
+}
+
+.cardPlus{
+    display: flex;
+    justify-content: center;
+}
+
+.accordion-body{
+    padding: 0px;
+    padding-bottom: 1px;
+}
+
+.document{
+    padding: 10px 10px;
+    color:rgb(11, 35, 65);
+}
+
+.document:hover{
+        color: rgb(0, 118, 213);
+}
+
+.accordion-item{
+    border-color:rgb(11, 35, 65);
+}
+
+.accordion-button:hover, .accordion-button:active, .accordion-button:focus, .accordion-button:not(.collapsed){
+    background-color:#e3e3e6;
+    border-color:rgb(11, 35, 65);
+    box-shadow:none;
+}
+
+/*ajout doc*/
+
+span.placeholder {
+   z-index: -1;
+}

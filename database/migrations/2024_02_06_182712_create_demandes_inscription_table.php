@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-
+        Schema::create('demandes_inscription', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
             $table->string('prenom');
             $table->string('adresse_email')->unique();
-            $table->string('matricule')->unique();
-            $table->boolean('a_acces')->default(false);
-            $table->string('password'); // Ajouter la colonne password
-            $table->rememberToken();
+            $table->timestamp('date_demande');
+            $table->foreignId('local_id')->constrained();
+            $table->string('statutDemande'); // en attente, approuvée, refusée
+            $table->unsignedBigInteger('utilisateur_id')->nullable();
+            $table->foreign('utilisateur_id')->references('id')->on('utilisateurs');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('demandes_inscription');
     }
 };
