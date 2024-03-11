@@ -16,8 +16,6 @@ class UtilisateursApiController extends Controller
         if (Auth::attempt($credentials)) {
             $utilisateur = Auth::user();
 
-            // Vous pouvez retourner les données utilisateur et un token ici.
-            // Pour cet exemple, nous retournons simplement les données utilisateur.
             return response()->json([
                 'success' => true,
                 'message' => 'Connexion réussie.',
