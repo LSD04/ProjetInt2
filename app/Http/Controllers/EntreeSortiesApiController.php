@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LocalController extends Controller
+class EntreeSortiesApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Entree_sortie::with(['user', 'local']);
+        
+        if ($request->filled('date')) {
+            $query->whereDate('date_et_heure_entree', $request->date);
+        }
+        
+        $historique = $query->get();
+        
+        return response()->json($historique);
     }
 
     /**

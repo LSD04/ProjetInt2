@@ -17,6 +17,22 @@ class UtilisateursController extends Controller
     }
 
 
+    public function login(Request $request)
+    {
+        
+            $reussi = Auth::attempt([ 'adresse_email'=>$request->adresse_email, 'password'=>$request->password]);
+
+            if ($reussi) {
+                // Redirige vers la page des demandes d'inscription après connexion réussie
+                return redirect()->route('demandesinscription.index')->with('message', 'Connexion réussie');
+            } else {
+                // En cas d'échec, redirige vers le formulaire de connexion avec un message d'erreur
+                return back()->with('invalid', 'L\'adresse courriel et/ou le mot de passe est invalide.');
+            }
+
+    }
+
+
     // Retirer l'accès à un utilisateur spécifique
     public function retirerAcces($id)
 {

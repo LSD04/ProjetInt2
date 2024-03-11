@@ -2,7 +2,13 @@
 
 @section('contenu')
 <div class="container">
-    <h1>Demandes Approuvées</h1>
+    <h1>Liste d'utilisateurs</h1>
+    
+    <form action="{{ route('utilisateurs.retirerAccesTous') }}" method="POST" class="mt-4">
+        @csrf
+        <button type="submit" class="btn btn-danger">Retirer l'accès à tous</button>
+    </form>
+
         <table class="table">
             <thead>
                 <tr>
@@ -32,7 +38,7 @@
                             <form action="{{ route('utilisateurs.remettreAcces', $demande->utilisateur_id) }}" method="POST">
                                 @csrf
                                 @method('PATCH') <!-- Supposant que vous avez une méthode PATCH configurée pour retirer l'accès -->
-                                <button type="submit" class="btn btn-sm btn-danger">Remettre l'accès</button>
+                                <button type="submit" class="btn btn-sm btn-success">Remettre l'accès</button>
                             </form>
                         @endif 
                     </td>
@@ -40,9 +46,7 @@
                 @endforeach
             </tbody>
         </table>
-    <form action="{{ route('utilisateurs.retirerAccesTous') }}" method="POST" class="mt-4">
-        @csrf
-        <button type="submit" class="btn btn-warning">Retirer l'accès à tous</button>
-    </form>
+   
 </div>
+
 @endsection
