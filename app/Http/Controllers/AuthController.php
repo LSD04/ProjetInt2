@@ -33,19 +33,9 @@ class AuthController extends Controller
             }
        }
        else 
-       {
-            $reussi = Auth::attempt([ 'adresse_email'=>$request->adresse_email, 'password'=>$request->password]);
-
-            if ($reussi) {
-                // Régénère la session pour protéger contre la fixation de session
-                //$request->session()->regenerate();
-
-                // Redirige vers la page des demandes d'inscription après connexion réussie
-                return redirect()->route('demandesinscription.index')->with('message', 'Connexion réussie');
-            } else {
-                // En cas d'échec, redirige vers le formulaire de connexion avec un message d'erreur
-                return back()->with('invalid', 'L\'adresse courriel et/ou le mot de passe est invalide.');
-            }
+       { 
+                return back()->with('invalid', 'Seul un admin peut se connecter');
+  
        }
 
     }
