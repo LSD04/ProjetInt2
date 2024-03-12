@@ -28,6 +28,15 @@ class UtilisateursController extends Controller
     return back()->with('success', 'Accès retiré avec succès.');
 }
 
+public function remettreAcces($id)
+{
+
+    $utilisateur = Utilisateur::findOrFail($id);
+    $utilisateur->a_acces = true;
+    $utilisateur->save();
+    return back()->with('success', 'Accès remis avec succès.');
+}
+
 // Retirer l'accès à tous les utilisateurs
     public function retirerAccesTous()
 {

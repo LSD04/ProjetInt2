@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\DemandesInscription;
+use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Log;
+use DB;
 
 class DemandesInscriptionsController extends Controller
 {
@@ -35,8 +38,10 @@ class DemandesInscriptionsController extends Controller
 
     public function demandesApprouvees()
     {
-        $demandesApprouvees = DemandesInscription::where('statutDemande', 'approuvée')->get();
-        return view('demandesApprouvees', compact('demandesApprouvees'));
+        $utilisateurs =  Utilisateur::all();
+        $demandesApprouvees = DB::select('select d.*, u.a_acces from demandes_inscription d inner join utilisateurs u on d.utilisateur_id = u.id where d.utilisateur_id = u.id && statutDemande = "approuvée"');
+        Log::debug($demandesApprouvees);
+        return view('demandesApprouvees', compact('demandesApprouvees', 'utilisateurs'));
     }
     
 
