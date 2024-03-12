@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthApiController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DemandesInscriptionsController;
 use App\Http\Controllers\EntreeSortiesController;
+use App\Http\Controllers\EntreeSortiesApiController;
 use App\Http\Controllers\LocalsController;
 use App\Http\Controllers\PermissionAccessController;
 use App\Http\Controllers\UserLocalsController;
@@ -25,19 +27,21 @@ use App\Http\Controllers\UtilisateursController;
 
 
 // Route pour la page d'accueil
-Route::get('/', function () {
-    return view('login');
+// Route::get('/', function () {
+//     return view('login');
 
-});
+// });
 
-// Route pour page d'accueil Admin
+
 
 
 // Route pour la gestion d'accès
 //Route::get('/gestionAccess', [AccessController::class, 'index'])->name('gestionAccess');
 
 // Route pour l'historique
-//Route::get('/entree-sortie', [EntreeSortiesController::class, 'index'])->name('entreeSortie.index');
+
+Route::get('/entree-sortie_API', [EntreeSortiesApiController::class, 'index'])->name('entreeSortie_API.index');
+
 
 //Afficher le profil d'un utilisateur
 //Route::get('/utilisateurs/{id}', [UtilisateursController::class, 'show'])->name('utilisateurs.show');
@@ -74,8 +78,10 @@ Route::get('/', function () {
 
 
 //Routes Connexion
-//Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-//Route::post('/login', [AuthController::class, 'login']);
+
+//Route::get('/login', [AuthApiController::class, 'showLoginForm'])->name('login');
+Route::post('/loginUtilisateur', [AuthApiController::class, 'login']);
+
 
 // Déconnexion
 //Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
