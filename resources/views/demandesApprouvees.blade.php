@@ -34,7 +34,14 @@
                                 @method('PATCH') <!-- Supposant que vous avez une méthode PATCH configurée pour retirer l'accès -->
                                 <button type="submit" class="btn btn-sm btn-danger">Remettre l'accès</button>
                             </form>
-                        @endif 
+                        @endif
+
+                        <form action="{{ route('utilisateurs.supprimer', $demande->utilisateur_id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Supprimer l'utilisateur </button>
+                        </form>
+                        
+
                     </td>
                 </tr>
                 @endforeach

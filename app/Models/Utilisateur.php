@@ -3,29 +3,48 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
 class Utilisateur extends Authenticatable
 {
-    protected $table = 'utilisateurs'; // Spécifiez explicitement le nom de la table
+    use HasFactory, Notifiable;
 
-    /**
-     * Les attributs qui sont mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'utilisateurs';
+
     protected $fillable = [
         'nom',
         'prenom',
         'adresse_email',
         'matricule',
-        'a_acces', // Assurez-vous que ce champ existe dans votre table si vous souhaitez l'utiliser
-     ];
+        'a_acces',
+    ];
 
     protected $hidden = ['password'];
-    protected $casts = [ 'a_acces' => 'boolean', // Assurez-vous que ce champ existe dans votre table si vous souhaitez l'utiliser
+
+    protected $casts = [
+        'a_acces' => 'boolean',
     ];
+
+    // Relation avec les demandes d'inscription
+    public function demandesInscription()
+    {
+        return $this->hasMany(DemandesInscription::class, 'utilisateur_id');
+    }
+
+    // Relation avec les entrées/sorties
+    public function entreesSorties()
+    {
+        return $this->hasMany(Entree_sortie::class, 'utilisateur_id');
+    }
+
+    // Supprime les relations et l'utilisateur
+    public function deleteWithRelations()
+    {
+        DB::transaction(function () {
+            $this->demandesInscription()->delete();
+            $this->entreesSorties()->delete();
+            $this->delete();
+        });
+    }
 }

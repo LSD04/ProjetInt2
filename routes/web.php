@@ -65,6 +65,11 @@ Route::patch('/demandesinscription/{id}', [DemandesInscriptionsController::class
 Route::patch('/utilisateurs/{id}/retirer-acces', [UtilisateursController::class, 'retirerAcces'])->name('utilisateurs.retirerAcces');
 Route::post('/utilisateurs/retirer-acces-tous', [UtilisateursController::class, 'retirerAccesTous'])->name('utilisateurs.retirerAccesTous');
  
+
+
+Route::post('/utilisateurs/supprimer/{utilisateur}', [DemandesInscriptionsController::class, 'supprimerUtilisateurEtDependances'])->name('utilisateurs.supprimer');
+
+
 // Redonner l,accès à tous les utilisateurs
 Route::patch('/utilisateurs/{id}/remettre-acces', [UtilisateursController::class, 'remettreAcces'])->name('utilisateurs.remettreAcces');
  
@@ -78,3 +83,5 @@ Route::post('/login', [AuthController::class, 'login']);
  
 // Déconnexion
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
