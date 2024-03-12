@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <title>Votre Nouveau Projet</title>
 </head>
-<body>
+<body class ="bg-blue-black-gradient">
     {{-- <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -61,9 +61,13 @@
                     @auth('admin')
                     <form method="POST" action="{{ route('logout') }}" class="d-flex">
                         @csrf
-                        <button type="submit" class="btn btn-danger">Déconnexion</button>
+                        <button type="submit" class="btn btn-link text-decoration-none" style="color: black;">
+                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                        </button>
                     </form>
                     @endauth
+
+
                 </div>
             </div>
         </nav>

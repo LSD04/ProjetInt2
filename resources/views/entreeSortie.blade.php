@@ -6,13 +6,11 @@
 
       <!-- Formulaire de Recherche -->
       <form action="{{ route('entreeSortie.index') }}" method="GET" class="mb-4">
-        <div class="form-group row">
-            <label for="date" class="col-sm-2 col-form-label">Filtrer par date:</label>
-            <div class="col-sm-10">
-                <input type="date" class="form-control" id="date" name="date" value="{{ request('date') }}">
-            </div>
+        <div class="input-group mb-3">
+            <label for="date" class="input-group-text">Filtrer par date:</label>
+            <input type="date" class="form-control" id="date" name="date" value="{{ request('date') }}">
+            <button type="submit" class="btn btn-primary" style="margin-left: 8px;">Rechercher</button>
         </div>
-        <button type="submit" class="btn btn-primary">Rechercher</button>
     </form>
     
     <table class="table">
