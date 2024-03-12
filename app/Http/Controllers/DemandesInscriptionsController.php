@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DemandesInscription;
 use App\Models\Utilisateur;
+use App\Models\Entree_sortie;
 use Illuminate\Http\Request;
 use Log;
 use DB;
@@ -53,6 +54,28 @@ class DemandesInscriptionsController extends Controller
     // Redirection vers la page des demandes en attente
      return redirect()->route('demandesinscription.index')->with('success', 'Demande approuvée avec succès.');
     }
+
+
+
+    public function supprimerUtilisateurEtDependances($utilisateurId)
+    {
+        DB::transaction(function () use ($utilisateurId) {
+            // Supprimer les enregistrements dépendants dans 'entree_sortie'
+            Entree_sortie::where('utilisateur_id', $utilisateurId)->delete();
+            
+            // Supprimer les demandes d'inscription liées à l'utilisateur
+            DemandesInscription::where('utilisateur_id', $utilisateurId)->delete();
+            
+            // Supprimer l'utilisateur
+            Utilisateur::find($utilisateurId)->delete();
+        });
+
+        // Rediriger vers une page appropriée après la suppression
+        return redirect()->route('demandes.approuvees')->with('success', 'Utilisateur et données associées supprimés avec succès.');
+    }
+    
+
+
 
 
 
