@@ -9,18 +9,39 @@ class EntreeSortiesApiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
-        $query = Entree_sortie::with(['user', 'local']);
+    // public function index(Request $request)
+    // {
+    //     $query = Entree_sortie::with(['user', 'local']);
     
-        if ($request->filled('date')) {
-            $query->whereDate('date_et_heure_entree', $request->date);
-        }
+    //     if ($request->filled('date')) {
+    //         $query->whereDate('date_et_heure_entree', $request->date);
+    //     }
     
-        $historique = $query->get();
+    //     $historique = $query->get();
     
-        return $historique;
+    //     return $historique;
+    // }
+
+ public function index(Request $request)
+{
+    $query = Entree_sortie::with(['user', 'local']);
+
+    // Filtrer par date si fournie
+    if ($request->filled('date')) {
+        $query->whereDate('date_et_heure_entree', $request->date);
     }
+
+    // Filtrer par ID d'utilisateur si fourni
+    if ($request->filled('user_id')) {
+        $query->where('utilisateur_id', $request->user_id);
+    }
+
+    $historique = $query->get();
+
+    return $historique;
+}
+
+  
 
     /**
      * Show the form for creating a new resource.
