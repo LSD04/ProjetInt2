@@ -39,7 +39,9 @@ use App\Http\Controllers\UtilisateursController;
 //Route::get('/gestionAccess', [AccessController::class, 'index'])->name('gestionAccess');
 
 // Route pour l'historique
+
 Route::get('/entree-sortie_API', [EntreeSortiesApiController::class, 'index'])->name('entreeSortie_API.index');
+
 
 //Afficher le profil d'un utilisateur
 //Route::get('/utilisateurs/{id}', [UtilisateursController::class, 'show'])->name('utilisateurs.show');
@@ -76,8 +78,10 @@ Route::get('/entree-sortie_API', [EntreeSortiesApiController::class, 'index'])->
 
 
 //Routes Connexion
+
 //Route::get('/login', [AuthApiController::class, 'showLoginForm'])->name('login');
 Route::post('/loginUtilisateur', [AuthApiController::class, 'login']);
+
 
 // Déconnexion
 //Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
