@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <title>Votre Nouveau Projet</title>
 </head>
-<body>
+<body class ="bg-blue-black-gradient">
     {{-- <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -34,7 +34,7 @@
     </header> --}}
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <!-- <a class="navbar-brand" href="#">Logo/Nom du Projet</a> -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,29 +44,31 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <!-- Lien vers la page des demandes d'inscription -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('demandesinscription.index') }}">Demandes d'Inscription</a>
+                            <a class="nav-link text-white" href="{{ route('demandesinscription.index') }}">Demandes d'Inscription</a>
                         </li>
                         <!-- Lien vers la page d'historique des entrées et sorties -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('entreeSortie.index') }}">Historique des Entrées et Sorties</a>
+                            <a class="nav-link text-white" href="{{ route('entreeSortie.index') }}">Historique des Entrées et Sorties</a>
                         </li>
-                         <!-- Nouveau lien vers la page des demandes approuvées -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('demandes.approuvees') }}">Demandes Approuvées</a>
-                    </li>
-                    
+                        <!-- Nouveau lien vers la page des demandes approuvées -->
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('demandes.approuvees') }}">Demandes Approuvées</a>
+                        </li>
                         <!-- Vous pouvez ajouter plus de liens ici si nécessaire -->
                     </ul>
                     <!-- Bouton de déconnexion visible uniquement pour les utilisateurs connectés -->
                     @auth('admin')
                     <form method="POST" action="{{ route('logout') }}" class="d-flex">
                         @csrf
-                        <button type="submit" class="btn btn-danger">Déconnexion</button>
+                        <button type="submit" class="btn btn-link text-decoration-none text-white">
+                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                        </button>
                     </form>
                     @endauth
                 </div>
             </div>
         </nav>
+        
     </header>
 
     <main class="py-4">
