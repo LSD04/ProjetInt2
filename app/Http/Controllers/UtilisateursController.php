@@ -77,7 +77,26 @@ public function remettreAcces($id)
      */
     public function store(Request $request)
     {
-        //
+        // Valider les données
+        $request->validate([
+            'nom' => 'required|string',
+            'prenom' => 'required|string',
+            'adresse_email' => 'required|email|unique:utilisateurs',
+            'password' => 'required|string',
+            // Ajoutez d'autres règles de validation si nécessaire
+        ]);
+
+        // Créer un nouvel utilisateur
+        $utilisateur = Utilisateur::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'adresse_email' => $request->adresse_email,
+            'password' => bcrypt($request->password), // Assurez-vous de hasher le mot de passe
+            // Ajoutez d'autres champs d'informations de l'utilisateur si nécessaire
+        ]);
+
+        // Retourner une réponse appropriée
+        return response()->json(['message' => 'Utilisateur créé avec succès', 'utilisateur' => $utilisateur], 201);
     }
 
 

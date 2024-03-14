@@ -82,6 +82,10 @@ Route::get('/entree-sortie_API/{id}', [EntreeSortiesApiController::class, 'index
 //Route::get('/login', [AuthApiController::class, 'showLoginForm'])->name('login');
 Route::post('/loginUtilisateur', [AuthApiController::class, 'login']);
 
+//Ajouter untilisateur
+Route::post('/api/utilisateurs', [UtilisateursController::class, 'store'])->name('utilisateurs.store');
+
+
 
 // Déconnexion
 //Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
