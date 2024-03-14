@@ -40,7 +40,7 @@ use App\Http\Controllers\UtilisateursController;
 
 // Route pour l'historique
 
-Route::get('/entree-sortie_API/{utilisateur_id}', [EntreeSortiesApiController::class, 'index'])->name('entreeSortie_API.index');
+Route::get('/entree-sortie_API/{id}', [EntreeSortiesApiController::class, 'index'])->name('entreeSortie_API.index');
 
 
 //Afficher le profil d'un utilisateur
