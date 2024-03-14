@@ -22,24 +22,31 @@ class EntreeSortiesApiController extends Controller
     //     return $historique;
     // }
 
- public function index(Request $request)
-{
-    $query = Entree_sortie::with(['user', 'local']);
-
-    // Filtrer par date si fournie
-    if ($request->filled('date')) {
-        $query->whereDate('date_et_heure_entree', $request->date);
+    public function index(Request $request)
+    {
+        // Récupérer l'id de l'utilisateur à partir de la session
+        $userId = $request->session()->get('user_id');
+    
+        // Initialiser la requête avec le modèle Entree_sortie
+        $query = Entree_sortie::with(['user', 'local']);
+    
+        // Filtrer par date si fournie
+        if ($request->filled('date')) {
+            $query->whereDate('date_et_heure_entree', $request->date);
+        }
+    
+        // Filtrer par ID d'utilisateur si récupéré de la session
+        if ($userId) {
+            $query->where('utilisateur_id', $userId);
+        }
+    
+        // Exécuter la requête et récupérer les données d'entrée-sortie filtrées
+        $historique = $query->get();
+    
+        // Retourner les données d'entrée-sortie filtrées
+        return $historique;
     }
-
-    // Filtrer par ID d'utilisateur si fourni
-    if ($request->filled('user_id')) {
-        $query->where('utilisateur_id', $request->user_id);
-    }
-
-    $historique = $query->get();
-
-    return $historique;
-}
+    
 
   
 
