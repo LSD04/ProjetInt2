@@ -10,7 +10,7 @@
             <div class="input-group mb-3">
                 <input type="text" name="search" class="form-control" id="searchInput" placeholder="Rechercher par nom ou prénom"">
                 <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary" style="margin-left: 8px;">Recherche</button>           
+                    <button type="submit" class="btn btn-dark" style="margin-left: 8px;">Recherche</button>           
                 </div>
             </div>
         </div>
