@@ -66,18 +66,27 @@ class AuthApiController extends Controller
         //
     }
 
-    public function login (Request $request){
-        $reussi = Auth::attempt([ 'adresse_email'=>$request->adresse_email, 'password'=>$request->password]);
+    public function login(Request $request)
+{
+    $reussi = Auth::attempt(['adresse_email' => $request->adresse_email, 'password' => $request->password]);
 
-        if ($reussi) {
-            // Régénère la session pour protéger contre la fixation de session
-            //$request->session()->regenerate();
+    if ($reussi) {
+        $utilisateur = Auth::user(); // Récupère les informations de l'utilisateur authentifié
 
-            // Redirige vers la page des demandes d'inscription après connexion réussie
-            return response()->json(['message' => 'Connexion réussie'], 200);
-        } else {
-            // En cas d'échec, redirige vers le formulaire de connexion avec un message d'erreur
-            return response()->json(['error' => 'Les informations ne sont pas valides'], 401);
-        }
+        // Vous pouvez ajouter d'autres informations de l'utilisateur si nécessaire
+        $informationsUtilisateur = [
+            'id' => $utilisateur->id,
+            'nom' => $utilisateur->nom,
+            'prenom' => $utilisateur->prenom,
+            // Ajoutez d'autres champs d'informations ici si nécessaire
+        ];
+
+        // Renvoie les informations de l'utilisateur avec un message de réussite
+        return response()->json(['message' => 'Connexion réussie', 'utilisateur' => $informationsUtilisateur], 200);
+    } else {
+        // En cas d'échec, retourne un message d'erreur
+        return response()->json(['error' => 'Les informations de connexion ne sont pas valides'], 401);
     }
+}
+
 }
