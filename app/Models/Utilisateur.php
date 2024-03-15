@@ -50,12 +50,12 @@ class Utilisateur extends Authenticatable
 
     public static function createUtilisateur($data)
     {
-        return self::create([
-            'nom' => $data['nom'],
-            'prenom' => $data['prenom'],
-            'adresse_email' => $data['adresse_email'],
-            'password' => bcrypt($data['password']),
-            'matricule' => $data['matricule'],
-        ]);
+        $utilisateur = Utilisateur::create([
+            'nom' => 'Johnn',
+            'prenom' => 'Doeee',
+            'adresse_email' => 'john.doe@example.com',
+            'password' => bcrypt('password123'),
+            'matricule' => 12345,
+        ]);        
     }
 }
