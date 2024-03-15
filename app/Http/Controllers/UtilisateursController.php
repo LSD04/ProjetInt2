@@ -83,6 +83,7 @@ public function remettreAcces($id)
             'prenom' => 'required|string',
             'adresse_email' => 'required|email|unique:utilisateurs',
             'password' => 'required|string',
+            'matricule' => 'required|int',
             // Ajoutez d'autres règles de validation si nécessaire
         ]);
 
@@ -93,6 +94,7 @@ public function remettreAcces($id)
             'adresse_email' => $request->adresse_email,
             'password' => bcrypt($request->password), // Assurez-vous de hasher le mot de passe
             // Ajoutez d'autres champs d'informations de l'utilisateur si nécessaire
+            'matricule' => $request->matricule,
         ]);
 
         // Retourner une réponse appropriée
