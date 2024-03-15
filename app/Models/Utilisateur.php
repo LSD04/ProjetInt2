@@ -47,4 +47,15 @@ class Utilisateur extends Authenticatable
             $this->delete();
         });
     }
+
+    public static function createUtilisateur($data)
+    {
+        return self::create([
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
+            'adresse_email' => $data['adresse_email'],
+            'password' => bcrypt($data['password']),
+            'matricule' => $data['matricule'],
+        ]);
+    }
 }

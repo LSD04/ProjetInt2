@@ -77,6 +77,7 @@ public function remettreAcces($id)
      */
     public function store(Request $request)
     {
+        Log::info('Données reçues:', $request->all());
         // Valider les données
         $request->validate([
             'nom' => 'required|string',
@@ -88,14 +89,17 @@ public function remettreAcces($id)
         ]);
 
         // Créer un nouvel utilisateur
-        $utilisateur = Utilisateur::create([
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
-            'adresse_email' => $request->adresse_email,
-            'password' => bcrypt($request->password), // Assurez-vous de hasher le mot de passe
-            // Ajoutez d'autres champs d'informations de l'utilisateur si nécessaire
-            'matricule' => $request->matricule,
-        ]);
+        // $utilisateur = Utilisateur::create([
+        //     'nom' => $request->nom,
+        //     'prenom' => $request->prenom,
+        //     'adresse_email' => $request->adresse_email,
+        //     'password' => bcrypt($request->password), // Assurez-vous de hasher le mot de passe
+        //     // Ajoutez d'autres champs d'informations de l'utilisateur si nécessaire
+        //     'matricule' => $request->matricule,
+        // ]);
+        $utilisateur = Utilisateur::createUtilisateur($request->all());
+
+        Log::info('Utilisateur créé avec succès:', $utilisateur);
 
         // Retourner une réponse appropriée
         return response()->json(['message' => 'Utilisateur créé avec succès', 'utilisateur' => $utilisateur], 201);
