@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Utilisateur;
+use App\Models\DemandesInscription;
 use Log;
 
 class UtilisateursController extends Controller
@@ -98,6 +99,12 @@ public function remettreAcces($id)
         //     'matricule' => $request->matricule,
         // ]);
         $utilisateur = Utilisateur::createUtilisateur($request->all());
+
+        $demandeIns = new DemandesInscription($request->all());
+        $demandeIns->statutDemande = "en attente";
+        $demandeIns->date_demande = now();
+        $demandeIns->utilisateur_id = $utilisateur->id;
+        $demandeIns->save();
 
         Log::info('Utilisateur créé avec succès:', $utilisateur);
 
