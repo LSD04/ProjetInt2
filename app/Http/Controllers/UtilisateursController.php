@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Utilisateur;
-use Log;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 
 class UtilisateursController extends Controller
 {
@@ -77,32 +78,33 @@ public function remettreAcces($id)
      */
     public function store(Request $request)
     {
-        Log::info('Données reçues:', $request->all());
-        // Valider les données
-        $request->validate([
-            'nom' => 'required|string',
-            'prenom' => 'required|string',
-            'adresse_email' => 'required|email|unique:utilisateurs',
-            'password' => 'required|string',
-            'matricule' => 'required|int',
-            // Ajoutez d'autres règles de validation si nécessaire
-        ]);
-
-        // Créer un nouvel utilisateur
-        // $utilisateur = Utilisateur::create([
-        //     'nom' => $request->nom,
-        //     'prenom' => $request->prenom,
-        //     'adresse_email' => $request->adresse_email,
-        //     'password' => bcrypt($request->password), // Assurez-vous de hasher le mot de passe
-        //     // Ajoutez d'autres champs d'informations de l'utilisateur si nécessaire
-        //     'matricule' => $request->matricule,
-        // ]);
-        $utilisateur = Utilisateur::createUtilisateur($request->all());
-
-        Log::info('Utilisateur créé avec succès:', $utilisateur);
-
-        // Retourner une réponse appropriée
-        return response()->json(['message' => 'Utilisateur créé avec succès', 'utilisateur' => $utilisateur], 201);
+      
+            // Enregistrer les données reçues dans les logs
+            Log::info('Données reçues:', $request->all());
+    
+            // Valider les données reçues
+            $validatedData = $request->validate([
+                'nom' => 'required|string',
+                'prenom' => 'required|string',
+                'adresse_email' => 'required|email|unique:utilisateurs',
+                'password' => 'required|string|min:6', // Exemple de règle de validation pour le mot de passe
+                'matricule' => 'required|int',
+                // Ajoutez d'autres règles de validation si nécessaire
+            ]);
+    
+            // Créer un nouvel utilisateur avec les données validées
+            $utilisateur = new Utilisateur($validatedData);
+            $utilisateur->password = Hash::make($validatedData['password']); // Hacher le mot de passe
+    
+            // Enregistrer l'utilisateur dans la base de données
+            $utilisateur->save();
+    
+            // Enregistrer l'utilisateur créé dans les logs
+            //Log::info('Utilisateur créé avec succès:', $utilisateur);
+    
+            // Retourner une réponse appropriée avec un code HTTP 201 (Created)
+            return response()->json(['message' => 'Utilisateur créé avec succès', 'utilisateur' => $utilisateur], 201);
+        
     }
 
 
