@@ -100,6 +100,7 @@ public function remettreAcces($id)
         // ]);
         $utilisateur = Utilisateur::createUtilisateur($request->all());
 
+        // pour insérer dans la table demandesInscription
         $demandeIns = new DemandesInscription($request->all());
         $demandeIns->statutDemande = "en attente";
         $demandeIns->date_demande = now();
