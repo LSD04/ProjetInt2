@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Utilisateur;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+
+use App\Models\DemandesInscription;
+use Log;
 
 class UtilisateursController extends Controller
 {
@@ -78,7 +80,7 @@ public function remettreAcces($id)
      */
     public function store(Request $request)
     {
-      
+
             // Enregistrer les données reçues dans les logs
             Log::info('Données reçues:', $request->all());
     
@@ -95,16 +97,21 @@ public function remettreAcces($id)
             // Créer un nouvel utilisateur avec les données validées
             $utilisateur = new Utilisateur($validatedData);
             $utilisateur->password = Hash::make($validatedData['password']); // Hacher le mot de passe
-    
             // Enregistrer l'utilisateur dans la base de données
             $utilisateur->save();
     
-            // Enregistrer l'utilisateur créé dans les logs
-            //Log::info('Utilisateur créé avec succès:', $utilisateur);
-    
-            // Retourner une réponse appropriée avec un code HTTP 201 (Created)
-            return response()->json(['message' => 'Utilisateur créé avec succès', 'utilisateur' => $utilisateur], 201);
-        
+        // pour insérer dans la table demandesInscription
+        $demandeIns = new DemandesInscription($request->all());
+        $demandeIns->statutDemande = "en attente";
+        $demandeIns->date_demande = now();
+        $demandeIns->utilisateur_id = $utilisateur->id;
+        $demandeIns->save();
+
+        Log::info('Utilisateur créé avec succès:', $utilisateur);
+
+        // Retourner une réponse appropriée
+        return response()->json(['message' => 'Utilisateur créé avec succès', 'utilisateur' => $utilisateur], 201);
+
     }
 
 

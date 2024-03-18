@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('adresse_email')->unique();
             $table->timestamp('date_demande');
-            $table->foreignId('local_id')->constrained();
+            $table->foreignId('local_id')->default(1);
             $table->string('statutDemande'); // en attente, approuvée, refusée
             $table->unsignedBigInteger('utilisateur_id')->nullable();
             $table->foreign('utilisateur_id')->references('id')->on('utilisateurs');
