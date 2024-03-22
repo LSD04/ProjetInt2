@@ -29,8 +29,9 @@ class DemandesInscriptionsController extends Controller
         //     // Récupère toutes les demandes si aucun terme de recherche n'est spécifié
         //     $demandesInscriptions = DemandesInscription::all();
         // }
-    
-        return view('DemandesInscription', compact('demandesInscriptions'));
+
+        // dd("J'arrive ici ");
+        return view('demandesInscription', compact('demandesInscriptions'));
     }
 
 
